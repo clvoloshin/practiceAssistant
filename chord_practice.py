@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 import argparse
-import math
 import numpy as np
-from collections import OrderedDict
-
 import sounddevice as sd
 from pychord import Chord
 from pychord.constants import QUALITY_DICT
@@ -80,8 +77,8 @@ try:
     samplerate = sd.query_devices(args.device, 'input')['default_samplerate']
 
     delta_f = (high - low) / (args.columns - 1)
-    fftsize = math.ceil(samplerate / delta_f)
-    low_bin = math.floor(low / delta_f)
+    fftsize = int(np.ceil(samplerate / delta_f))
+    low_bin = int(np.floor(low / delta_f))
 
     NOTE_MIN = 21       # A0
     NOTE_MAX = 108      # C8
